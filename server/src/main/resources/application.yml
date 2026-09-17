@@ -1,0 +1,67 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    url: jdbc:sqlite:data/auth.db
+
+sa-token:
+  token-name: satoken
+  token-style: uuid
+  timeout: 2592000
+  active-timeout: -1
+  is-concurrent: true
+  is-share: true
+  is-read-cookie: false
+  is-read-header: true
+  is-write-header: false
+  is-log: false
+
+starter:
+  demo-users:
+    - username: alice
+      password: alice123
+      login-id: "1"
+      roles: [user]
+      phone: "13800000001"
+    - username: bob
+      password: bob123
+      login-id: "2"
+      roles: [user, admin]
+      phone: "13800000002"
+    - username: carol
+      password: carol123
+      login-id: "3"
+      roles: [user]
+      phone: "13800000003"
+    - username: dave
+      password: dave123
+      login-id: "4"
+      roles: [user]
+      phone: "13800000004"
+  # 前后端分离：放行独立前端(web/)的跨域请求
+  cors:
+    allowed-origins:
+      - http://localhost:8000
+      - http://127.0.0.1:8000
+      - http://localhost:5173
+      - http://127.0.0.1:5173
+  # 图形验证码：debug-echo 仅供本地演示/联调回显答案，生产必须关闭
+  captcha:
+    required: true
+    debug-echo: true
+    ttl-seconds: 120
+  # 短信验证码：demo 通道写服务端日志；debug-echo 生产必须关闭并接真实短信服务商
+  sms:
+    debug-echo: true
+    code-ttl-seconds: 300
+    send-cooldown-seconds: 60
+  # 运营商一键登录(demo 通道:固定模拟本机号,真实接入需 App 内嵌运营商 SDK)
+  oneclick:
+    demo-phone: "13800000001"
+    token-ttl-seconds: 120
+  # 设备码登录（RFC 8628 精简版）：授权凭据仅存内存；web-base 指向独立前端授权页
+  device-code:
+    web-base: http://127.0.0.1:8000
+    ttl-seconds: 900
+    poll-interval-seconds: 3

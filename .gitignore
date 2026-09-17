@@ -1,0 +1,30 @@
+# Rust
+/target
+Cargo.lock.orig
+
+# Java
+server/target
+server/data/
+*.class
+
+# IDE
+.idea/
+.vscode/
+
+# web(vite/react)
+web/node_modules/
+web/dist/
+
+# android(工具链直接构建)
+android/build/
+android/*.apk
+android/*.idsig
+android/debug.keystore
+
+# 运行时/本地数据
+*.log
+deploy/compose/higress-data/
+
+# web (React/Vite)
+web/node_modules/
+web/dist/
